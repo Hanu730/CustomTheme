@@ -1,0 +1,29 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/spfx-serve.schema.json",
+  "port": 4321,
+  "https": true,
+  "serveConfigurations": {
+    "default": {
+      "pageUrl": "https://websyn.sharepoint.com/sites/Websyn-Intranet-UAT/SitePages/ProjectHome.aspx",
+      "customActions": {
+        "89474558-d1cf-49f9-bafa-a691d1215342": {
+          "location": "ClientSideExtension.ApplicationCustomizer",
+          "properties": {
+            "testMessage": "Test message"
+          }
+        }
+      }
+    },
+    "customTheme": {
+      "pageUrl": "https://websyn.sharepoint.com/sites/Websyn-Intranet-UAT/SitePages/ProjectHome.aspx",
+      "customActions": {
+        "89474558-d1cf-49f9-bafa-a691d1215342": {
+          "location": "ClientSideExtension.ApplicationCustomizer",
+          "properties": {
+            "testMessage": "Test message"
+          }
+        }
+      }
+    }
+  }
+}
