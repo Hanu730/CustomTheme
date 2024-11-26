@@ -155,8 +155,16 @@ export default class CustomThemeApplicationCustomizer
     // color:white;
     // }
     .ms-HorizontalNavItem-link{
-    color:white
+    color:white;
+    font-weight: bold; 
     }
+    .f1vjtpfu .ms-HorizontalNavItem-linkText {
+       font-weight: bold; 
+    /* font-weight: var(--fontWeightCustomFont500, var(--fontWeightRegular)); */
+}
+    .f1ig8277 .ms-HorizontalNavItem-linkText.is-selected {
+     font-weight: bold; 
+}
    
     /* Style individual navigation items */
     .ms-HorizontalNavItem {
