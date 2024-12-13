@@ -38,6 +38,22 @@ export default class CustomThemeApplicationCustomizer
     const isSiteOwner = await this.isUserInGroup('Websyn-Intranet-UAT Owners');
     const isSiteMember = await this.isUserInGroup('Websyn-Intranet-UAT Members');
     console.log(isSiteVisitor);
+   
+
+    const mainHeader = document.querySelector("[class^='mainHeader']"); // Replace with actual class or ID
+    const topLinks = document.querySelector("[class^='topNavBox']"); // Replace with actual class or ID
+
+    if (mainHeader && topLinks) {
+        debugger;
+      // Move all content from Main Header to Top Links
+      while (mainHeader.firstChild) {
+        topLinks.appendChild(mainHeader.firstChild);
+      }
+
+      // Optionally, remove the Main Header after moving its content
+      mainHeader.parentElement?.removeChild(mainHeader);
+    }
+
     if(isSiteOwner || isSiteMember){
         this.injectQuickLaunchStylesforMembers()
       
@@ -63,6 +79,10 @@ div#spCommandBar {
 .a_b_50a7110f:not(.e_b_50a7110f):not(.o_b_50a7110f) {
     margin-top: 0;
 }
+    .a_c_50a7110f:not(.e_c_50a7110f).u_c_50a7110f {
+     padding: 0;
+    }
+
  .titleAndNavWrapper-112.titleAndNavWrapper-112.titleAndNavWrapper-112.titleAndNavWrapper-112.titleAndNavWrapper-112 {
     display: inline-block;
 }
@@ -151,6 +171,15 @@ div#spCommandBar {
         width: 50%;
         padding-right:0px;
     }
+
+// @media(min-width: 640px)
+// {
+// .CanvasSection-col.CanvasSection-sm12{width: 443px; }
+// .CanvasSection-col.CanvasSection-sm12:first-child{width: 443px; }
+// .announce-body-inn_967f1bbb .announce-body-inn-l_967f1bbb img {
+//     height: 71px;
+// }
+// }
         .g_a_50a7110f .a_c_50a7110f:not(.e_c_50a7110f).s_c_50a7110f:first-child {
     width: 88%;
     padding-right: 0;
@@ -169,6 +198,15 @@ private injectQuickLaunchStylesforMembers(): void {
 
 
 const customCSS=`
+// @media(min-width: 640px)
+// {
+// .CanvasSection-col.CanvasSection-sm12{width: 443px; }
+// .CanvasSection-col.CanvasSection-sm12:first-child{width: 443px; }
+
+// }
+.a_c_50a7110f:not(.e_c_50a7110f).u_c_50a7110f {
+     padding: 0;
+    }
 div#SuiteNavPlaceholder {
   display: none;
 }
@@ -278,7 +316,7 @@ private async isUserInGroup(groupName: string): Promise<boolean> {
     var isvisitor= false;
     const groupname=groupName;
 
-    debugger;
+    //debugger;
         //var result=null;
 
   var endpoint = `${this.context.pageContext.web.absoluteUrl}/_api/web/sitegroups/getbyname('${groupName}')/users?$filter=Id eq ${this.context.pageContext.legacyPageContext.userId}`;
