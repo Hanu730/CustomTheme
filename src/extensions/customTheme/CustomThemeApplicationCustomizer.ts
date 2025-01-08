@@ -3,7 +3,7 @@ import {
   BaseApplicationCustomizer
 } from '@microsoft/sp-application-base';
 import { loadStyles } from '@microsoft/load-themed-styles';
-import { SPHttpClient } from '@microsoft/sp-http';
+//import { SPHttpClient } from '@microsoft/sp-http';
 // import * as ReactDom from 'react-dom';
 // import * as React from 'react';
 // import { SearchBox } from '@fluentui/react';
@@ -28,498 +28,30 @@ export default class CustomThemeApplicationCustomizer
   extends BaseApplicationCustomizer<ICustomThemeApplicationCustomizerProperties> {
 
 
-    private wrapperSelector: string = ".sideActionsWrapper-61";
+    //private wrapperSelector: string = ".sideActionsWrapper-61";
   //private placeholder: HTMLDivElement | null = null;
 
   public async onInit(): Promise<void> {
-   this.injectSearchBox();
-   const isSiteVisitor = await this.isUserInGroup('Websyn-Intranet-UAT Visitors');
-
-    const isSiteOwner = await this.isUserInGroup('Websyn-Intranet-UAT Owners');
-    const isSiteMember = await this.isUserInGroup('Websyn-Intranet-UAT Members');
-    console.log(isSiteVisitor);
-   
-
-    const mainHeader = document.querySelector("[class^='mainHeader']"); // Replace with actual class or ID
-    const topLinks = document.querySelector("[class^='topNavBox']"); // Replace with actual class or ID
-
-    if (mainHeader && topLinks) {
-        debugger;
-      // Move all content from Main Header to Top Links
-      while (mainHeader.firstChild) {
-        topLinks.appendChild(mainHeader.firstChild);
-      }
-
-      // Optionally, remove the Main Header after moving its content
-      mainHeader.parentElement?.removeChild(mainHeader);
-    }
-
-    if(isSiteOwner || isSiteMember){
-        this.injectQuickLaunchStylesforMembers()
-      
-    }else{
-        this.injectQuickLaunchStylesforVisitors();
-    }
+   this.injectQuickLaunchStyles();
   
   return Promise.resolve();
   
   }
 
-  private injectQuickLaunchStylesforVisitors(): void {
+//   private injectQuickLaunchStylesforVisitors(): void {
 
-   const customCSS=  `div#SuiteNavPlaceholder {
-    display: none;
-}
-
-div#spCommandBar {
-    display: none;
-}
-
-.a_b_50a7110f:not(.e_b_50a7110f):not(.o_b_50a7110f) {
-    margin-top: 0;
-}
-
-.a_c_50a7110f:not(.e_c_50a7110f).u_c_50a7110f {
-    padding: 0;
-}
-
-.titleAndNavWrapper-112 {
-    display: inline-block;
-}
-
-.ms-HorizontalNavItems {
-    float: right;
-}
-
-.mainHeader-108 {
-    padding-top: 15px;
-}
-
-/* Uncomment if needed
-.fh2jcsl .ms-ButtonShim-flexContainer {
-    display: none;
-    display: block;
-}
-*/
-
-.ms-Stack.css-208 > div {
-    border-radius: 0 !important;
-}
-
-/* Uncomment if needed
-.sideActionsWrapper-61 {
-    display: none;
-}
-*/
-
-.announcementWebPart_d7c8a9f1 h3 {
-    border-radius: 0 !important;
-}
-
-.announcementWebPart_d7c8a9f1 {
-    padding: 0;
-    border: 0;
-}
-
-.quickLinksHeader_5d356418 {
-    background: transparent;
-    color: #000;
-    font-size: 18px;
-    background-color: #f26724;
-    border-radius: 0;
-}
-
-.actionsSubcell {
-    display: none;
-}
-
-.ms-Stack > div {
-    border-radius: 0 !important;
-}
-
-.css-150,
-.ms-Stack span {
-    font-size: 14px;
-}
-
-.a_b_50a7110f:not(.e_b_50a7110f):not(.o_b_50a7110f) {
-    padding-left: 0;
-    margin-bottom: 0;
-}
-
-.homeWebpart_5d356418 {
-    padding: 0;
-    border: 0;
-}
-
-.titleSubcell-113 {
-    float: left;
-}
-
-[dir=ltr] .ms-HorizontalNavItem:first-child {
-    margin-left: 29px;
-    margin-right: 16px !important;
-}
-
-[dir=ltr] .ms-HorizontalNavItem:not(:last-child) {
-    margin-right: 1px;
-}
-
-.fwiecsv #SiteHeaderTitle a {
-    font-size: 24px;
-}
-
-.fpnq9et .ms-HorizontalNavItem-linkText.is-selected {
-    font-size: 15px;
-    color: #333333;
-    font-weight: 600;
-}
-
-.mm_am_9f38462c img {
-    object-fit: cover !important;
-    width: 100%;
-}
-
-@media (min-width: 1024px) {
-    .a_c_50a7110f:not(.e_c_50a7110f).t_c_50a7110f {
-        padding-right: 0;
-    }
-    .a_c_50a7110f:not(.e_c_50a7110f).r_c_50a7110f {
-        padding: 0;
-    }
-}
-
-@media (min-width: 640px) {
-    .a_c_50a7110f:not(.e_c_50a7110f).s_c_50a7110f {
-        width: 50%;
-        padding-right: 0px;
-    }
-    
-    /* Uncomment if needed
-    .CanvasSection-col.CanvasSection-sm12 {
-        width: 443px;
-    }
-    .CanvasSection-col.CanvasSection-sm12:first-child {
-        width: 443px;
-    }
-    .announce-body-inn_967f1bbb .announce-body-inn-l_967f1bbb img {
-        height: 71px;
-    }
-    */
-}
-
-.g_a_50a7110f .a_c_50a7110f:not(.e_c_50a7110f).s_c_50a7110f:first-child {
-    width: 88%;
-    padding-right: 0;
-}
-
-.fv4b208 .ms-HorizontalNavItem-linkText {
-    font-size: 15px;
-    color: #333333;
-    font-weight: 600;
-}
-    .a_a_50a7110f:not(.b_a_50a7110f):not(.c_a_50a7110f) {
-
-    padding: 0 8px;
-
-    margin-bottom: 0;
-
-} 
- 
-`
-   
-//  const customCSS=`
-//  div#SuiteNavPlaceholder {
+//    const customCSS=  `div#SuiteNavPlaceholder {
 //     display: none;
 // }
+
 // div#spCommandBar {
 //     display: none;
 // }
+//  .a_b_50a7110f:not(.b_b_50a7110f) {
+//      padding-right: 0;   
+//     }
 // .a_b_50a7110f:not(.e_b_50a7110f):not(.o_b_50a7110f) {
 //     margin-top: 0;
-// }
-//     .a_c_50a7110f:not(.e_c_50a7110f).u_c_50a7110f {
-//      padding: 0;
-//     }
-
-//  .titleAndNavWrapper-112.titleAndNavWrapper-112.titleAndNavWrapper-112.titleAndNavWrapper-112.titleAndNavWrapper-112 {
-//     display: inline-block;
-// }
-//     .ms-HorizontalNavItems {
-//     float: right;
-// }
-
-//     .mainHeader-108.mainHeader-108.mainHeader-108.mainHeader-108.mainHeader-108 {
-//     padding-top: 15px;
-// }
-// // .fh2jcsl .ms-ButtonShim-flexContainer {
-// //     display: none;
-// //     diplay:block;
-// // }
-//     .ms-Stack.css-208 > div {
-//     border-radius: 0 !important;
-// }
-//     //  .sideActionsWrapper-61.sideActionsWrapper-61.sideActionsWrapper-61.sideActionsWrapper-61.sideActionsWrapper-61 {
-//     //      display: none;
-//     // }
-// .announcementWebPart_d7c8a9f1 h3 {
-//     border-radius: 0 !important;
-// }
-// .announcementWebPart_d7c8a9f1 {
-//     padding: 0;
-//     border: 0;
-// }
-  
-//  .quickLinksHeader_5d356418 {
-//     background: transparent;
-//     color: #000;
-//     font-size: 18px; background-color: #f26724;
-//     border-radius: 0;
-// }
-//     .actionsSubcell {
-//          display: none;
-//     }
-//     .ms-Stack > div {
-//     border-radius: 0 !important;
-// }
-// .css-150, .ms-Stack span {
-//     font-size: 14px;
-// }
-// .a_b_50a7110f:not(.e_b_50a7110f):not(.o_b_50a7110f) {
-//     padding-left: 0;
-//     margin-bottom:0;
-// }
-// .homeWebpart_5d356418 {  
-//     padding: 0;
-//     border: 0;
-// }
-// .titleSubcell-113.titleSubcell-113.titleSubcell-113.titleSubcell-113.titleSubcell-113 {
-//     float: left;
-// }
-// [dir=ltr] .ms-HorizontalNavItem:first-child {
-//     margin-left: 29px;
-//     margin-right: 16px !important;
-// }
-// [dir=ltr] .ms-HorizontalNavItem:not(:last-child) {
-//     margin-right: 1px;
-// }
-// .fwiecsv #SiteHeaderTitle a {
-//     font-size: 24px;
-
-// }
-// .fpnq9et .ms-HorizontalNavItem-linkText.is-selected {
-//     font-size: 15px;
-//    color: #333333;
-//    font-weight:600;
-  
-// }
-//     .mm_am_9f38462c img {
-//     object-fit: cover !important;
-//     width:100%;
-// }
-//     @media (min-width: 1024px) {
-//     .a_c_50a7110f:not(.e_c_50a7110f).t_c_50a7110f {
-//         padding-right: 0;
-//     }
-//     .a_c_50a7110f:not(.e_c_50a7110f).r_c_50a7110f {
-//         padding-left: 0;
-//     }
-// }
-// @media (min-width: 640px) {
-//     .a_c_50a7110f:not(.e_c_50a7110f).s_c_50a7110f {
-//         width: 50%;
-//         padding-right:0px;
-//     }
-
-// // @media(min-width: 640px)
-// // {
-// // .CanvasSection-col.CanvasSection-sm12{width: 443px; }
-// // .CanvasSection-col.CanvasSection-sm12:first-child{width: 443px; }
-// // .announce-body-inn_967f1bbb .announce-body-inn-l_967f1bbb img {
-// //     height: 71px;
-// // }
-// // }
-//         .g_a_50a7110f .a_c_50a7110f:not(.e_c_50a7110f).s_c_50a7110f:first-child {
-//     width: 88%;
-//     padding-right: 0;
-// }
-// }
-// .fv4b208 .ms-HorizontalNavItem-linkText {
-//    font-size: 15px;
-//    color: #333333;
-//    font-weight:600;
-// }`;
-    loadStyles(customCSS);
-   
-}
-
-private injectQuickLaunchStylesforMembers(): void {
-
-    const customCSS=  `div#SuiteNavPlaceholder {
-        display: none;
-    }
-    
-    .a_b_50a7110f:not(.e_b_50a7110f):not(.o_b_50a7110f) {
-        margin-top: 0;
-    }
-    
-    .a_c_50a7110f:not(.e_c_50a7110f).u_c_50a7110f {
-        padding: 0;
-    }
-    
-    .titleAndNavWrapper-112 {
-        display: inline-block;
-    }
-    
-    .ms-HorizontalNavItems {
-        float: right;
-    }
-    
-    .mainHeader-108 {
-        padding-top: 15px;
-    }
-    
-    /* Uncomment if needed
-    .fh2jcsl .ms-ButtonShim-flexContainer {
-        display: none;
-        display: block;
-    }
-    */
-    
-    .ms-Stack.css-208 > div {
-        border-radius: 0 !important;
-    }
-    
-    /* Uncomment if needed
-    .sideActionsWrapper-61 {
-        display: none;
-    }
-    */
-    
-    .announcementWebPart_d7c8a9f1 h3 {
-        border-radius: 0 !important;
-    }
-    
-    .announcementWebPart_d7c8a9f1 {
-        padding: 0;
-        border: 0;
-    }
-    
-    .quickLinksHeader_5d356418 {
-        background: transparent;
-        color: #000;
-        font-size: 18px;
-        background-color: #f26724;
-        border-radius: 0;
-    }
-    
-    .actionsSubcell {
-        display: none;
-    }
-    
-    .ms-Stack > div {
-        border-radius: 0 !important;
-    }
-    
-    .css-150,
-    .ms-Stack span {
-        font-size: 14px;
-    }
-    
-    .a_b_50a7110f:not(.e_b_50a7110f):not(.o_b_50a7110f) {
-        padding-left: 0;
-        margin-bottom: 0;
-    }
-    
-    .homeWebpart_5d356418 {
-        padding: 0;
-        border: 0;
-    }
-    
-    .titleSubcell-113 {
-        float: left;
-    }
-    
-    [dir=ltr] .ms-HorizontalNavItem:first-child {
-        margin-left: 29px;
-        margin-right: 16px !important;
-    }
-    
-    [dir=ltr] .ms-HorizontalNavItem:not(:last-child) {
-        margin-right: 1px;
-    }
-    
-    .fwiecsv #SiteHeaderTitle a {
-        font-size: 24px;
-    }
-    
-    .fpnq9et .ms-HorizontalNavItem-linkText.is-selected {
-        font-size: 15px;
-        color: #333333;
-        font-weight: 600;
-    }
-    
-    .mm_am_9f38462c img {
-        object-fit: cover !important;
-        width: 100%;
-    }
-    
-    @media (min-width: 1024px) {
-        .a_c_50a7110f:not(.e_c_50a7110f).t_c_50a7110f {
-            padding-right: 0;
-        }
-        .a_c_50a7110f:not(.e_c_50a7110f).r_c_50a7110f {
-            padding: 0;
-        }
-    }
-    
-    @media (min-width: 640px) {
-        .a_c_50a7110f:not(.e_c_50a7110f).s_c_50a7110f {
-            width: 50%;
-            padding-right: 0px;
-        }
-        
-        /* Uncomment if needed
-        .CanvasSection-col.CanvasSection-sm12 {
-            width: 443px;
-        }
-        .CanvasSection-col.CanvasSection-sm12:first-child {
-            width: 443px;
-        }
-        .announce-body-inn_967f1bbb .announce-body-inn-l_967f1bbb img {
-            height: 71px;
-        }
-        */
-    }
-    
-    .g_a_50a7110f .a_c_50a7110f:not(.e_c_50a7110f).s_c_50a7110f:first-child {
-        width: 88%;
-        padding-right: 0;
-    }
-    
-    .fv4b208 .ms-HorizontalNavItem-linkText {
-        font-size: 15px;
-        color: #333333;
-        font-weight: 600;
-    }
-        .a_a_50a7110f:not(.b_a_50a7110f):not(.c_a_50a7110f) {
-    
-        padding: 0 8px;
-    
-        margin-bottom: 0;
-    
-    } 
-     
-    `
-//   const customCSS=  `/* General Styling */
-// div#SuiteNavPlaceholder {
-//     display: none;
-// }
-
-// .a_b_50a7110f:not(.e_b_50a7110f):not(.o_b_50a7110f) {
-//     margin-top: 0;
-//     padding: 0;
-//     margin-bottom: 0;
 // }
 
 // .a_c_50a7110f:not(.e_c_50a7110f).u_c_50a7110f {
@@ -528,6 +60,61 @@ private injectQuickLaunchStylesforMembers(): void {
 
 // .titleAndNavWrapper-112 {
 //     display: inline-block;
+// }
+
+// .ms-HorizontalNavItems {
+//     float: right;
+// }
+
+// .mainHeader-108 {
+//     padding-top: 15px;
+// }
+
+
+
+// .ms-Stack.css-208 > div {
+//     border-radius: 0 !important;
+// }
+
+
+// .announcementWebPart_d7c8a9f1 h3 {
+//     border-radius: 0 !important;
+// }
+
+// .announcementWebPart_d7c8a9f1 {
+//     padding: 0;
+//     border: 0;
+// }
+
+// .quickLinksHeader_5d356418 {
+//     background: transparent;
+//     color: #000;
+//     font-size: 18px;
+//     background-color: #f26724;
+//     border-radius: 0;
+// }
+
+// .actionsSubcell {
+//     display: none;
+// }
+
+// .ms-Stack > div {
+//     border-radius: 0 !important;
+// }
+
+// .css-150,
+// .ms-Stack span {
+//     font-size: 14px;
+// }
+
+// .a_b_50a7110f:not(.e_b_50a7110f):not(.o_b_50a7110f) {
+//     padding-left: 0;
+//     margin-bottom: 0;
+// }
+
+// .homeWebpart_5d356418 {
+//     padding: 0;
+//     border: 0;
 // }
 
 // .titleSubcell-113 {
@@ -544,7 +131,7 @@ private injectQuickLaunchStylesforMembers(): void {
 // }
 
 // .fwiecsv #SiteHeaderTitle a {
-//     font-size: 20px;
+//     font-size: 24px;
 // }
 
 // .fpnq9et .ms-HorizontalNavItem-linkText.is-selected {
@@ -553,64 +140,17 @@ private injectQuickLaunchStylesforMembers(): void {
 //     font-weight: 600;
 // }
 
-// .ms-HorizontalNavItems {
-//     float: right;
-// }
-
-// .mainHeader-108 {
-//     padding-top: 15px;
-// }
-
-// /* Stack Styling */
-// .ms-Stack > div,
-// .ms-Stack.css-208 > div {
-//     border-radius: 0 !important;
-// }
-
-// .css-150,
-// .ms-Stack span {
-//     font-size: 14px;
-// }
-
-// /* Announcement Web Part */
-// .announcementWebPart_d7c8a9f1 h3 {
-//     border-radius: 0 !important;
-// }
-
-// .announcementWebPart_d7c8a9f1 {
-//     padding: 0;
-//     border: 0;
-// }
-
-// /* Quick Links */
-// .quickLinksHeader_5d356418 {
-//     background: transparent;
-//     color: #000;
-//     font-size: 18px;
-//     background-color: #f26724;
-//     border-radius: 0;
-// }
-
-// /* Home Web Part */
-// .homeWebpart_5d356418 {
-//     padding: 0;
-//     border: 0;
-// }
-
-// /* Images */
 // .mm_am_9f38462c img {
 //     object-fit: cover !important;
 //     width: 100%;
 // }
 
-// /* Responsive Media Queries */
 // @media (min-width: 1024px) {
 //     .a_c_50a7110f:not(.e_c_50a7110f).t_c_50a7110f {
 //         padding-right: 0;
 //     }
-
 //     .a_c_50a7110f:not(.e_c_50a7110f).r_c_50a7110f {
-//         padding-left: 0;
+//         padding: 0;
 //     }
 // }
 
@@ -619,41 +159,19 @@ private injectQuickLaunchStylesforMembers(): void {
 //         width: 50%;
 //         padding-right: 0px;
 //     }
-
-//     .g_a_50a7110f .a_c_50a7110f:not(.e_c_50a7110f).s_c_50a7110f:first-child {
-//         width: 88%;
-//         padding-right: 0;
-//     }
+    
+    
 // }
 
-// /* Navigation Items */
+// .g_a_50a7110f .a_c_50a7110f:not(.e_c_50a7110f).s_c_50a7110f:first-child {
+//     width: 88%;
+//     padding-right: 0;
+// }
+
 // .fv4b208 .ms-HorizontalNavItem-linkText {
 //     font-size: 15px;
 //     color: #333333;
 //     font-weight: 600;
-// }
-
-// /* Optional commented sections */
-//  /*
-// .fh2jcsl .ms-ButtonShim-flexContainer {
-//     display: none;
-//     display: block;
-// }
-
-// .sideActionsWrapper-61 {
-//     display: none;
-// }
-
-// .CanvasSection-col.CanvasSection-sm12 {
-//     width: 443px;
-// }
-
-// .CanvasSection-col.CanvasSection-sm12:first-child {
-//     width: 443px;
-// }
-
-// .announce-body-inn_967f1bbb .announce-body-inn-l_967f1bbb img {
-//     height: 71px;
 // }
 //     .a_a_50a7110f:not(.b_a_50a7110f):not(.c_a_50a7110f) {
 
@@ -663,190 +181,771 @@ private injectQuickLaunchStylesforMembers(): void {
 
 // } 
  
-// */
 // `
+   
+// //  const customCSS=`
+// //  div#SuiteNavPlaceholder {
+// //     display: none;
+// // }
+// // div#spCommandBar {
+// //     display: none;
+// // }
+// // .a_b_50a7110f:not(.e_b_50a7110f):not(.o_b_50a7110f) {
+// //     margin-top: 0;
+// // }
+// //     .a_c_50a7110f:not(.e_c_50a7110f).u_c_50a7110f {
+// //      padding: 0;
+// //     }
 
-// const customCSS=`
-// // @media(min-width: 640px)
-// // {
-// // .CanvasSection-col.CanvasSection-sm12{width: 443px; }
-// // .CanvasSection-col.CanvasSection-sm12:first-child{width: 443px; }
+// //  .titleAndNavWrapper-112.titleAndNavWrapper-112.titleAndNavWrapper-112.titleAndNavWrapper-112.titleAndNavWrapper-112 {
+// //     display: inline-block;
+// // }
+// //     .ms-HorizontalNavItems {
+// //     float: right;
+// // }
+
+// //     .mainHeader-108.mainHeader-108.mainHeader-108.mainHeader-108.mainHeader-108 {
+// //     padding-top: 15px;
+// // }
+// // // .fh2jcsl .ms-ButtonShim-flexContainer {
+// // //     display: none;
+// // //     diplay:block;
+// // // }
+// //     .ms-Stack.css-208 > div {
+// //     border-radius: 0 !important;
+// // }
+// //     //  .sideActionsWrapper-61.sideActionsWrapper-61.sideActionsWrapper-61.sideActionsWrapper-61.sideActionsWrapper-61 {
+// //     //      display: none;
+// //     // }
+// // .announcementWebPart_d7c8a9f1 h3 {
+// //     border-radius: 0 !important;
+// // }
+// // .announcementWebPart_d7c8a9f1 {
+// //     padding: 0;
+// //     border: 0;
+// // }
+  
+// //  .quickLinksHeader_5d356418 {
+// //     background: transparent;
+// //     color: #000;
+// //     font-size: 18px; background-color: #f26724;
+// //     border-radius: 0;
+// // }
+// //     .actionsSubcell {
+// //          display: none;
+// //     }
+// //     .ms-Stack > div {
+// //     border-radius: 0 !important;
+// // }
+// // .css-150, .ms-Stack span {
+// //     font-size: 14px;
+// // }
+// // .a_b_50a7110f:not(.e_b_50a7110f):not(.o_b_50a7110f) {
+// //     padding-left: 0;
+// //     margin-bottom:0;
+// // }
+// // .homeWebpart_5d356418 {  
+// //     padding: 0;
+// //     border: 0;
+// // }
+// // .titleSubcell-113.titleSubcell-113.titleSubcell-113.titleSubcell-113.titleSubcell-113 {
+// //     float: left;
+// // }
+// // [dir=ltr] .ms-HorizontalNavItem:first-child {
+// //     margin-left: 29px;
+// //     margin-right: 16px !important;
+// // }
+// // [dir=ltr] .ms-HorizontalNavItem:not(:last-child) {
+// //     margin-right: 1px;
+// // }
+// // .fwiecsv #SiteHeaderTitle a {
+// //     font-size: 24px;
 
 // // }
-// .a_c_50a7110f:not(.e_c_50a7110f).u_c_50a7110f {
-//      padding: 0;
-//     }
-// div#SuiteNavPlaceholder {
-//   display: none;
-// }
-// .a_b_50a7110f:not(.e_b_50a7110f):not(.o_b_50a7110f) {
-//   margin-top: 0;
-// }
-// .titleAndNavWrapper-112.titleAndNavWrapper-112.titleAndNavWrapper-112.titleAndNavWrapper-112.titleAndNavWrapper-112 {
-//   display: inline-block;
-// }
-// .titleSubcell-113.titleSubcell-113.titleSubcell-113.titleSubcell-113.titleSubcell-113 {
-//   float: left;
-// }
-// [dir=ltr] .ms-HorizontalNavItem:first-child {
-//   margin-left: 29px;
-//   margin-right: 16px !important;
-// }
-// [dir=ltr] .ms-HorizontalNavItem:not(:last-child) {
-//   margin-right: 1px;
-// }
-// .fwiecsv #SiteHeaderTitle a {
-//   font-size: 20px;
+// // .fpnq9et .ms-HorizontalNavItem-linkText.is-selected {
+// //     font-size: 15px;
+// //    color: #333333;
+// //    font-weight:600;
+  
+// // }
+// //     .mm_am_9f38462c img {
+// //     object-fit: cover !important;
+// //     width:100%;
+// // }
+// //     @media (min-width: 1024px) {
+// //     .a_c_50a7110f:not(.e_c_50a7110f).t_c_50a7110f {
+// //         padding-right: 0;
+// //     }
+// //     .a_c_50a7110f:not(.e_c_50a7110f).r_c_50a7110f {
+// //         padding-left: 0;
+// //     }
+// // }
+// // @media (min-width: 640px) {
+// //     .a_c_50a7110f:not(.e_c_50a7110f).s_c_50a7110f {
+// //         width: 50%;
+// //         padding-right:0px;
+// //     }
 
+// // // @media(min-width: 640px)
+// // // {
+// // // .CanvasSection-col.CanvasSection-sm12{width: 443px; }
+// // // .CanvasSection-col.CanvasSection-sm12:first-child{width: 443px; }
+// // // .announce-body-inn_967f1bbb .announce-body-inn-l_967f1bbb img {
+// // //     height: 71px;
+// // // }
+// // // }
+// //         .g_a_50a7110f .a_c_50a7110f:not(.e_c_50a7110f).s_c_50a7110f:first-child {
+// //     width: 88%;
+// //     padding-right: 0;
+// // }
+// // }
+// // .fv4b208 .ms-HorizontalNavItem-linkText {
+// //    font-size: 15px;
+// //    color: #333333;
+// //    font-weight:600;
+// // }`;
+//     loadStyles(customCSS);
+   
 // }
-// .fpnq9et .ms-HorizontalNavItem-linkText.is-selected {
-//   font-size: 15px;
-//    color: #333333;
-//    font-weight:600;
+private injectQuickLaunchStyles(): void {
+
+    const customCSS=  `
+  .a_b_50a7110f:not(.b_b_50a7110f) {
+      padding-right: 0;   
+     }
+ .a_b_50a7110f:not(.e_b_50a7110f):not(.o_b_50a7110f) {
+     margin-top: 0;
+ }
+ 
+ .a_c_50a7110f:not(.e_c_50a7110f).u_c_50a7110f {
+     padding: 0;
+ }
+ 
+ .titleAndNavWrapper-112 {
+     display: inline-block;
+ }
+ 
+ .ms-HorizontalNavItems {
+     float: right;
+ }
+ 
+ .mainHeader-108 {
+     padding-top: 15px;
+ }
+ 
+ 
+ 
+ .ms-Stack.css-208 > div {
+     border-radius: 0 !important;
+ }
+ 
+ 
+ .announcementWebPart_d7c8a9f1 h3 {
+     border-radius: 0 !important;
+ }
+ 
+ .announcementWebPart_d7c8a9f1 {
+     padding: 0;
+     border: 0;
+ }
+ 
+ .quickLinksHeader_5d356418 {
+     background: transparent;
+     color: #000;
+     font-size: 18px;
+     background-color: #f26724;
+     border-radius: 0;
+ }
+ 
+ .actionsSubcell {
+     display: none;
+ }
+ 
+ .ms-Stack > div {
+     border-radius: 0 !important;
+ }
+ 
+ .css-150,
+ .ms-Stack span {
+     font-size: 14px;
+ }
+ 
+ .a_b_50a7110f:not(.e_b_50a7110f):not(.o_b_50a7110f) {
+     padding-left: 0;
+     margin-bottom: 0;
+ }
+ 
+ .homeWebpart_5d356418 {
+     padding: 0;
+     border: 0;
+ }
+ 
+ .titleSubcell-113 {
+     float: left;
+ }
+ 
+ [dir=ltr] .ms-HorizontalNavItem:first-child {
+     margin-left: 29px;
+     margin-right: 16px !important;
+ }
+ 
+ [dir=ltr] .ms-HorizontalNavItem:not(:last-child) {
+     margin-right: 1px;
+ }
+ 
+ .fwiecsv #SiteHeaderTitle a {
+     font-size: 24px;
+ }
+ 
+ .fpnq9et .ms-HorizontalNavItem-linkText.is-selected {
+     font-size: 15px;
+     color: #333333;
+     font-weight: 600;
+ }
+ 
+ .mm_am_9f38462c img {
+     object-fit: cover !important;
+     width: 100%;
+ }
+ 
+ @media (min-width: 1024px) {
+     .a_c_50a7110f:not(.e_c_50a7110f).t_c_50a7110f {
+         padding-right: 0;
+     }
+     .a_c_50a7110f:not(.e_c_50a7110f).r_c_50a7110f {
+         padding: 0;
+     }
+ }
+ 
+ @media (min-width: 640px) {
+     .a_c_50a7110f:not(.e_c_50a7110f).s_c_50a7110f {
+         width: 50%;
+         padding-right: 0px;
+     }
+     
+     
+ }
+ 
+ .g_a_50a7110f .a_c_50a7110f:not(.e_c_50a7110f).s_c_50a7110f:first-child {
+     width: 88%;
+     padding-right: 0;
+ }
+ 
+ .fv4b208 .ms-HorizontalNavItem-linkText {
+     font-size: 15px;
+     color: #333333;
+     font-weight: 600;
+ }
+     .a_a_50a7110f:not(.b_a_50a7110f):not(.c_a_50a7110f) {
+ 
+     padding: 0 8px;
+ 
+     margin-bottom: 0;
+ 
+ } 
   
-  
-// }
-//      .ms-HorizontalNavItems {
-//     float: right;
-// }
-//     .mainHeader-108.mainHeader-108.mainHeader-108.mainHeader-108.mainHeader-108 {
-//     padding-top: 15px;
-// }
+ `  
+      loadStyles(customCSS);
+    
+ }
+
+// private injectQuickLaunchStylesforMembers(): void {
+
+//     const customCSS=  `div#SuiteNavPlaceholder {
+//         display: none;
+//     }
+//         .a_b_50a7110f:not(.b_b_50a7110f) {
+//      padding-right: 0;   
+//     }
+    
+//     .a_b_50a7110f:not(.e_b_50a7110f):not(.o_b_50a7110f) {
+//         margin-top: 0;
+//     }
+    
+//     .a_c_50a7110f:not(.e_c_50a7110f).u_c_50a7110f {
+//         padding: 0;
+//     }
+    
+//     .titleAndNavWrapper-112 {
+//         display: inline-block;
+//     }
+    
+//     .ms-HorizontalNavItems {
+//         float: right;
+//     }
+    
+//     .mainHeader-108 {
+//         padding-top: 15px;
+//     }
+    
+//     /* Uncomment if needed
+//     .fh2jcsl .ms-ButtonShim-flexContainer {
+//         display: none;
+//         display: block;
+//     }
+//     */
+    
+//     .ms-Stack.css-208 > div {
+//         border-radius: 0 !important;
+//     }
+    
+//     /* Uncomment if needed
+//     .sideActionsWrapper-61 {
+//         display: none;
+//     }
+//     */
+    
+//     .announcementWebPart_d7c8a9f1 h3 {
+//         border-radius: 0 !important;
+//     }
+    
+//     .announcementWebPart_d7c8a9f1 {
+//         padding: 0;
+//         border: 0;
+//     }
+    
+//     .quickLinksHeader_5d356418 {
+//         background: transparent;
+//         color: #000;
+//         font-size: 18px;
+//         background-color: #f26724;
+//         border-radius: 0;
+//     }
+    
+//     .actionsSubcell {
+//         display: none;
+//     }
+    
+//     .ms-Stack > div {
+//         border-radius: 0 !important;
+//     }
+    
+//     .css-150,
+//     .ms-Stack span {
+//         font-size: 14px;
+//     }
+    
+//     .a_b_50a7110f:not(.e_b_50a7110f):not(.o_b_50a7110f) {
+//         padding-left: 0;
+//         margin-bottom: 0;
+//     }
+    
+//     .homeWebpart_5d356418 {
+//         padding: 0;
+//         border: 0;
+//     }
+    
+//     .titleSubcell-113 {
+//         float: left;
+//     }
+    
+//     [dir=ltr] .ms-HorizontalNavItem:first-child {
+//         margin-left: 29px;
+//         margin-right: 16px !important;
+//     }
+    
+//     [dir=ltr] .ms-HorizontalNavItem:not(:last-child) {
+//         margin-right: 1px;
+//     }
+    
+//     .fwiecsv #SiteHeaderTitle a {
+//         font-size: 24px;
+//     }
+    
+//     .fpnq9et .ms-HorizontalNavItem-linkText.is-selected {
+//         font-size: 15px;
+//         color: #333333;
+//         font-weight: 600;
+//     }
+    
+//     .mm_am_9f38462c img {
+//         object-fit: cover !important;
+//         width: 100%;
+//     }
+    
+//     @media (min-width: 1024px) {
+//         .a_c_50a7110f:not(.e_c_50a7110f).t_c_50a7110f {
+//             padding-right: 0;
+//         }
+//         .a_c_50a7110f:not(.e_c_50a7110f).r_c_50a7110f {
+//             padding: 0;
+//         }
+//     }
+    
+//     @media (min-width: 640px) {
+//         .a_c_50a7110f:not(.e_c_50a7110f).s_c_50a7110f {
+//             width: 50%;
+//             padding-right: 0px;
+//         }
+        
+//         /* Uncomment if needed
+//         .CanvasSection-col.CanvasSection-sm12 {
+//             width: 443px;
+//         }
+//         .CanvasSection-col.CanvasSection-sm12:first-child {
+//             width: 443px;
+//         }
+//         .announce-body-inn_967f1bbb .announce-body-inn-l_967f1bbb img {
+//             height: 71px;
+//         }
+//         */
+//     }
+    
+//     .g_a_50a7110f .a_c_50a7110f:not(.e_c_50a7110f).s_c_50a7110f:first-child {
+//         width: 88%;
+//         padding-right: 0;
+//     }
+    
+//     .fv4b208 .ms-HorizontalNavItem-linkText {
+//         font-size: 15px;
+//         color: #333333;
+//         font-weight: 600;
+//     }
+//         .a_a_50a7110f:not(.b_a_50a7110f):not(.c_a_50a7110f) {
+    
+//         padding: 0 8px;
+    
+//         margin-bottom: 0;
+    
+//     } 
+     
+//     `
+// //   const customCSS=  `/* General Styling */
+// // div#SuiteNavPlaceholder {
+// //     display: none;
+// // }
+
+// // .a_b_50a7110f:not(.e_b_50a7110f):not(.o_b_50a7110f) {
+// //     margin-top: 0;
+// //     padding: 0;
+// //     margin-bottom: 0;
+// // }
+
+// // .a_c_50a7110f:not(.e_c_50a7110f).u_c_50a7110f {
+// //     padding: 0;
+// // }
+
+// // .titleAndNavWrapper-112 {
+// //     display: inline-block;
+// // }
+
+// // .titleSubcell-113 {
+// //     float: left;
+// // }
+
+// // [dir=ltr] .ms-HorizontalNavItem:first-child {
+// //     margin-left: 29px;
+// //     margin-right: 16px !important;
+// // }
+
+// // [dir=ltr] .ms-HorizontalNavItem:not(:last-child) {
+// //     margin-right: 1px;
+// // }
+
+// // .fwiecsv #SiteHeaderTitle a {
+// //     font-size: 20px;
+// // }
+
+// // .fpnq9et .ms-HorizontalNavItem-linkText.is-selected {
+// //     font-size: 15px;
+// //     color: #333333;
+// //     font-weight: 600;
+// // }
+
+// // .ms-HorizontalNavItems {
+// //     float: right;
+// // }
+
+// // .mainHeader-108 {
+// //     padding-top: 15px;
+// // }
+
+// // /* Stack Styling */
+// // .ms-Stack > div,
+// // .ms-Stack.css-208 > div {
+// //     border-radius: 0 !important;
+// // }
+
+// // .css-150,
+// // .ms-Stack span {
+// //     font-size: 14px;
+// // }
+
+// // /* Announcement Web Part */
+// // .announcementWebPart_d7c8a9f1 h3 {
+// //     border-radius: 0 !important;
+// // }
+
+// // .announcementWebPart_d7c8a9f1 {
+// //     padding: 0;
+// //     border: 0;
+// // }
+
+// // /* Quick Links */
+// // .quickLinksHeader_5d356418 {
+// //     background: transparent;
+// //     color: #000;
+// //     font-size: 18px;
+// //     background-color: #f26724;
+// //     border-radius: 0;
+// // }
+
+// // /* Home Web Part */
+// // .homeWebpart_5d356418 {
+// //     padding: 0;
+// //     border: 0;
+// // }
+
+// // /* Images */
+// // .mm_am_9f38462c img {
+// //     object-fit: cover !important;
+// //     width: 100%;
+// // }
+
+// // /* Responsive Media Queries */
+// // @media (min-width: 1024px) {
+// //     .a_c_50a7110f:not(.e_c_50a7110f).t_c_50a7110f {
+// //         padding-right: 0;
+// //     }
+
+// //     .a_c_50a7110f:not(.e_c_50a7110f).r_c_50a7110f {
+// //         padding-left: 0;
+// //     }
+// // }
+
+// // @media (min-width: 640px) {
+// //     .a_c_50a7110f:not(.e_c_50a7110f).s_c_50a7110f {
+// //         width: 50%;
+// //         padding-right: 0px;
+// //     }
+
+// //     .g_a_50a7110f .a_c_50a7110f:not(.e_c_50a7110f).s_c_50a7110f:first-child {
+// //         width: 88%;
+// //         padding-right: 0;
+// //     }
+// // }
+
+// // /* Navigation Items */
+// // .fv4b208 .ms-HorizontalNavItem-linkText {
+// //     font-size: 15px;
+// //     color: #333333;
+// //     font-weight: 600;
+// // }
+
+// // /* Optional commented sections */
+// //  /*
 // // .fh2jcsl .ms-ButtonShim-flexContainer {
 // //     display: none;
-// //     diplay:block;
+// //     display: block;
 // // }
-//     .ms-Stack > div {
-//     border-radius: 0 !important;
+
+// // .sideActionsWrapper-61 {
+// //     display: none;
+// // }
+
+// // .CanvasSection-col.CanvasSection-sm12 {
+// //     width: 443px;
+// // }
+
+// // .CanvasSection-col.CanvasSection-sm12:first-child {
+// //     width: 443px;
+// // }
+
+// // .announce-body-inn_967f1bbb .announce-body-inn-l_967f1bbb img {
+// //     height: 71px;
+// // }
+// //     .a_a_50a7110f:not(.b_a_50a7110f):not(.c_a_50a7110f) {
+
+// //     padding: 0 8px;
+
+// //     margin-bottom: 0;
+
+// // } 
+ 
+// // */
+// // `
+
+// // const customCSS=`
+// // // @media(min-width: 640px)
+// // // {
+// // // .CanvasSection-col.CanvasSection-sm12{width: 443px; }
+// // // .CanvasSection-col.CanvasSection-sm12:first-child{width: 443px; }
+
+// // // }
+// // .a_c_50a7110f:not(.e_c_50a7110f).u_c_50a7110f {
+// //      padding: 0;
+// //     }
+// // div#SuiteNavPlaceholder {
+// //   display: none;
+// // }
+// // .a_b_50a7110f:not(.e_b_50a7110f):not(.o_b_50a7110f) {
+// //   margin-top: 0;
+// // }
+// // .titleAndNavWrapper-112.titleAndNavWrapper-112.titleAndNavWrapper-112.titleAndNavWrapper-112.titleAndNavWrapper-112 {
+// //   display: inline-block;
+// // }
+// // .titleSubcell-113.titleSubcell-113.titleSubcell-113.titleSubcell-113.titleSubcell-113 {
+// //   float: left;
+// // }
+// // [dir=ltr] .ms-HorizontalNavItem:first-child {
+// //   margin-left: 29px;
+// //   margin-right: 16px !important;
+// // }
+// // [dir=ltr] .ms-HorizontalNavItem:not(:last-child) {
+// //   margin-right: 1px;
+// // }
+// // .fwiecsv #SiteHeaderTitle a {
+// //   font-size: 20px;
+
+// // }
+// // .fpnq9et .ms-HorizontalNavItem-linkText.is-selected {
+// //   font-size: 15px;
+// //    color: #333333;
+// //    font-weight:600;
+  
+  
+// // }
+// //      .ms-HorizontalNavItems {
+// //     float: right;
+// // }
+// //     .mainHeader-108.mainHeader-108.mainHeader-108.mainHeader-108.mainHeader-108 {
+// //     padding-top: 15px;
+// // }
+// // // .fh2jcsl .ms-ButtonShim-flexContainer {
+// // //     display: none;
+// // //     diplay:block;
+// // // }
+// //     .ms-Stack > div {
+// //     border-radius: 0 !important;
+// // }
+// // .css-150, .ms-Stack span{
+// //     font-size: 14px;
+// // }
+// // .a_b_50a7110f:not(.e_b_50a7110f):not(.o_b_50a7110f) {
+// //     padding-left: 0;
+// //      margin-bottom:0;
+// // }
+// //     .ms-Stack.css-208 > div {
+// //     border-radius: 0 !important;
+// // }
+// //     // .sideActionsWrapper-61.sideActionsWrapper-61.sideActionsWrapper-61.sideActionsWrapper-61.sideActionsWrapper-61 {
+// //     //      display: none;
+// //     // }
+// // .announcementWebPart_d7c8a9f1 h3 {
+// //     border-radius: 0 !important;
+// // }
+// // .announcementWebPart_d7c8a9f1 {
+// //     padding: 0;
+// //     border: 0;
+// // }
+// //  .quickLinksHeader_5d356418 {
+// //     background: transparent;
+// //     color: #000;
+// //     font-size: 18px; background-color: #f26724;
+// //     border-radius: 0;
+// // }
+// // .homeWebpart_5d356418 {  
+// //     padding: 0;
+// //     border: 0;
+// // }
+// //   .mm_am_9f38462c img {
+// //   object-fit: cover !important;
+// //   width:100%;
+// // }
+// //   @media (min-width: 1024px) {
+// //   .a_c_50a7110f:not(.e_c_50a7110f).t_c_50a7110f {
+// //       padding-right: 0;
+// //   }
+// //   .a_c_50a7110f:not(.e_c_50a7110f).r_c_50a7110f {
+// //       padding-left: 0;
+// //   }
+// // }
+// // @media (min-width: 640px) {
+// //   .a_c_50a7110f:not(.e_c_50a7110f).s_c_50a7110f {
+// //       width: 50%;
+// //       padding-right:0px;
+// //   }
+// //       .g_a_50a7110f .a_c_50a7110f:not(.e_c_50a7110f).s_c_50a7110f:first-child {
+// //   width: 88%;
+// //   padding-right: 0;
+// // }
+// // }
+// // .fv4b208 .ms-HorizontalNavItem-linkText {
+// //   font-size: 15px;
+// //    color: #333333;
+// //    font-weight:600;
+// // }`;
+//   loadStyles(customCSS);
+//   //loadStyles(customCSS);
 // }
-// .css-150, .ms-Stack span{
-//     font-size: 14px;
-// }
-// .a_b_50a7110f:not(.e_b_50a7110f):not(.o_b_50a7110f) {
-//     padding-left: 0;
-//      margin-bottom:0;
-// }
-//     .ms-Stack.css-208 > div {
-//     border-radius: 0 !important;
-// }
-//     // .sideActionsWrapper-61.sideActionsWrapper-61.sideActionsWrapper-61.sideActionsWrapper-61.sideActionsWrapper-61 {
-//     //      display: none;
-//     // }
-// .announcementWebPart_d7c8a9f1 h3 {
-//     border-radius: 0 !important;
-// }
-// .announcementWebPart_d7c8a9f1 {
-//     padding: 0;
-//     border: 0;
-// }
-//  .quickLinksHeader_5d356418 {
-//     background: transparent;
-//     color: #000;
-//     font-size: 18px; background-color: #f26724;
-//     border-radius: 0;
-// }
-// .homeWebpart_5d356418 {  
-//     padding: 0;
-//     border: 0;
-// }
-//   .mm_am_9f38462c img {
-//   object-fit: cover !important;
-//   width:100%;
-// }
-//   @media (min-width: 1024px) {
-//   .a_c_50a7110f:not(.e_c_50a7110f).t_c_50a7110f {
-//       padding-right: 0;
-//   }
-//   .a_c_50a7110f:not(.e_c_50a7110f).r_c_50a7110f {
-//       padding-left: 0;
-//   }
-// }
-// @media (min-width: 640px) {
-//   .a_c_50a7110f:not(.e_c_50a7110f).s_c_50a7110f {
-//       width: 50%;
-//       padding-right:0px;
-//   }
-//       .g_a_50a7110f .a_c_50a7110f:not(.e_c_50a7110f).s_c_50a7110f:first-child {
-//   width: 88%;
-//   padding-right: 0;
-// }
-// }
-// .fv4b208 .ms-HorizontalNavItem-linkText {
-//   font-size: 15px;
-//    color: #333333;
-//    font-weight:600;
-// }`;
-  loadStyles(customCSS);
-  //loadStyles(customCSS);
-}
 
 
-private async isUserInGroup(groupName: string): Promise<boolean> {
-    var isvisitor= false;
-    const groupname=groupName;
+// private async isUserInGroup(groupName: string): Promise<boolean> {
+//     var isvisitor= false;
+//     const groupname=groupName;
 
-    //debugger;
-        //var result=null;
+//     //debugger;
+//         //var result=null;
 
-  var endpoint = `${this.context.pageContext.web.absoluteUrl}/_api/web/sitegroups/getbyname('${groupName}')/users?$filter=Id eq ${this.context.pageContext.legacyPageContext.userId}`;
-  if(groupname =="Websyn-Intranet-UAT Visitors"){
-   endpoint = `${this.context.pageContext.web.absoluteUrl}/_api/web/sitegroups/getbyname('${groupName}')/users`;
-   const response = await this.context.spHttpClient.get(endpoint, SPHttpClient.configurations.v1);
-   const result = await response.json();
-   result.value.forEach((element:any )=> {
-    if(element.Title=="Everyone except external users")
-        isvisitor=true;
-   });
-   return isvisitor;
-  }else{
-  const response = await this.context.spHttpClient.get(endpoint, SPHttpClient.configurations.v1);
-  const result = await response.json();
+//   var endpoint = `${this.context.pageContext.web.absoluteUrl}/_api/web/sitegroups/getbyname('${groupName}')/users?$filter=Id eq ${this.context.pageContext.legacyPageContext.userId}`;
+//   if(groupname =="Websyn-Intranet-UAT Visitors"){
+//    endpoint = `${this.context.pageContext.web.absoluteUrl}/_api/web/sitegroups/getbyname('${groupName}')/users`;
+//    const response = await this.context.spHttpClient.get(endpoint, SPHttpClient.configurations.v1);
+//    const result = await response.json();
+//    result.value.forEach((element:any )=> {
+//     if(element.Title=="Everyone except external users")
+//         isvisitor=true;
+//    });
+//    return isvisitor;
+//   }else{
+//   const response = await this.context.spHttpClient.get(endpoint, SPHttpClient.configurations.v1);
+//   const result = await response.json();
 
-  return result.value.length > 0;
-  } // If user is in the group, ?$filter=Id eq ${this.context.pageContext.legacyPageContext.userId} result.value will have data
-}
+//   return result.value.length > 0;
+//   } // If user is in the group, ?$filter=Id eq ${this.context.pageContext.legacyPageContext.userId} result.value will have data
+// }
 
-private injectSearchBox = (): void => {
-    const wrapperElement = document.querySelector(this.wrapperSelector) as HTMLElement;
-    const ele=document.querySelectorAll("[class^='sideActionsWrapper']");
-    console.log(ele);
+// private injectSearchBox = (): void => {
+//     const wrapperElement = document.querySelector(this.wrapperSelector) as HTMLElement;
+//     const ele=document.querySelectorAll("[class^='sideActionsWrapper']");
+//     console.log(ele);
     
-    document.querySelectorAll("[class^='sideActionsWrapper']").forEach(e=>{e.remove()});
+//     document.querySelectorAll("[class^='sideActionsWrapper']").forEach(e=>{e.remove()});
 
-    if (wrapperElement) {
-      // Remove all children of the wrapper
-      while (wrapperElement.firstChild) {
+//     if (wrapperElement) {
+//       // Remove all children of the wrapper
+//       while (wrapperElement.firstChild) {
        
-      }
+//       }
 
-      //document.querySelectorAll("[class^='sideActionsWrapper']").forEach(e=>{e.remove()});
-      // Get all elements with the class name
-      //document.querySelectorAll('#spSiteHeader > div > div.fui-FluentProvider.fui-FluentProvider3.___1c1870d.f1ym3bx4.f1u2r49w.f6sp5hn.f1mo0ibp.fjoy568.ff5ikls.f1qumt79.f1bxpd7w > div > div > div.sideActionsWrapper-61 > div.actionsSubcell-63').forEach(e=>{e.remove()});
+//       //document.querySelectorAll("[class^='sideActionsWrapper']").forEach(e=>{e.remove()});
+//       // Get all elements with the class name
+//       //document.querySelectorAll('#spSiteHeader > div > div.fui-FluentProvider.fui-FluentProvider3.___1c1870d.f1ym3bx4.f1u2r49w.f6sp5hn.f1mo0ibp.fjoy568.ff5ikls.f1qumt79.f1bxpd7w > div > div > div.sideActionsWrapper-61 > div.actionsSubcell-63').forEach(e=>{e.remove()});
 
 
-      // Create a placeholder div for the search box
-    //   this.placeholder = document.createElement("div");
-    //   wrapperElement.appendChild(this.placeholder);
+//       // Create a placeholder div for the search box
+//     //   this.placeholder = document.createElement("div");
+//     //   wrapperElement.appendChild(this.placeholder);
 
-    //   // Create the textbox element using TypeScript
-    //   const inputElement: HTMLInputElement = document.createElement("input");
-    //   inputElement.type = "text";
-    //   inputElement.placeholder = "Search...";
-    //   inputElement.style.padding = '5px';
-    //   inputElement.style.width = '200px';
-    //   inputElement.style.borderRadius = '4px';
+//     //   // Create the textbox element using TypeScript
+//     //   const inputElement: HTMLInputElement = document.createElement("input");
+//     //   inputElement.type = "text";
+//     //   inputElement.placeholder = "Search...";
+//     //   inputElement.style.padding = '5px';
+//     //   inputElement.style.width = '200px';
+//     //   inputElement.style.borderRadius = '4px';
 
-    //   // Add an event listener for handling input changes
-    //   inputElement.addEventListener("input", (e) => {
-    //     console.log("Input value:", (e.target as HTMLInputElement).value);
-    //   });
+//     //   // Add an event listener for handling input changes
+//     //   inputElement.addEventListener("input", (e) => {
+//     //     console.log("Input value:", (e.target as HTMLInputElement).value);
+//     //   });
 
-    //   // Append the textbox to the placeholder
-    //   this.placeholder.appendChild(inputElement);
-      // Render a React SearchBox component
+//     //   // Append the textbox to the placeholder
+//     //   this.placeholder.appendChild(inputElement);
+//       // Render a React SearchBox component
 
-    }
-  };
+//     }
+//   };
 
 // private async validateUser(): Promise<boolean> {
 //   const isSiteOwner = await this.isUserInGroup('Websyn-Intranet-UAT Owners');
